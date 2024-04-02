@@ -1,14 +1,6 @@
 # auto-script
 # Automate your CTFs or Bug Hunting by `auto-script`
 
-![off-hacker aka raven](https://images.vexels.com/media/users/3/136657/isolated/preview/0d648f1f545ad913c20d7d6447d43449-raven-circle-icon.png)
-
-<img src="[drawing.jpg](https://images.vexels.com/media/users/3/136657/isolated/preview/0d648f1f545ad913c20d7d6447d43449-raven-circle-icon.png)" alt="off-hacker aka raven" width="200"/>
-
-![off-hacker aka raven](https://images.vexels.com/media/users/3/136657/isolated/preview/0d648f1f545ad913c20d7d6447d43449-raven-circle-icon.png) = 250x250)
-
-<img src="(https://images.vexels.com/media/users/3/136657/isolated/preview/0d648f1f545ad913c20d7d6447d43449-raven-circle-icon.png)" width="400" height="790">
-
 - [+] Automatically make directories named: `recon/`, `exploitation/` , `post/` , `loot/`
    - [+] Automatically make a `README.md` file and add contents:
    - [+] Title as `Machine Name: <Machine_IP>`

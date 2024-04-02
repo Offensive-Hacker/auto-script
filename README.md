@@ -12,6 +12,12 @@
   - [+] Uses a single nmap command to do comprehensive Nmap scan and save the Nmap reports to recon/<nmap-reports>
 - [+] Recursive Directory Busting using dirb. Also Save the output file to recon/dirb-report.txt
 
-
+=====================================================
+=====================================================
+=====================================================
 
 > Note: This script is under development!!!
+
+=====================================================
+=====================================================
+=====================================================

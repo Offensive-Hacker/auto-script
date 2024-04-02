@@ -1,8 +1,6 @@
 # auto-script
 # Automate your CTFs or Bug Hunting by `auto-script`
 
-![Uploading tumblr_nzm5lizTts1qf7pjro1_500.gif…]()
-
 
 - [+] Automatically make directories named: `recon/`, `exploitation/` , `post/` , `loot/`
    - [+] Automatically make a `README.md` file and add contents:

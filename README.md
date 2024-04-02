@@ -1,5 +1,5 @@
 # auto-script
-# Automate your CTF's by `auto-script`
+# Automate your CTFs or Bug Hunting by `auto-script`
    
 - [+] Automatically make directories named: `recon/`, `exploitation/` , `post/` , `loot/`
    - [+] Automatically make a `README.md` file and add contents:

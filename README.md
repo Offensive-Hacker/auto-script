@@ -15,7 +15,8 @@
 
 =====================================================
 
-> Note: This script is under development!!!
+> Note: Auto-Script is under development!!! You may found some issues with it.
+> Please submit your bugs or issues here: tsty8wu7@duck.com
 
 =====================================================
 

@@ -42,9 +42,11 @@ echo -e "\n
             █                                                                                          █
             █    ${BOLDGREEN}[𓄿 ]${ENDCOLOR} ${BOLDGREEN}Created by${ENDCOLOR} ${BOLDRED}Offensive Hacker${ENDCOLOR}                                                      █
             █    ${BOLDGREEN}[𓄿 ]${ENDCOLOR} ${BOLDGREEN}Follow me on IG:${ENDCOLOR} ${BOLDRED}@0ff3n51v3_h4ck3r${ENDCOLOR}                                               █
-            █    ${BOLDGREEN}[🌟]${ENDCOLOR} ${BOLDGREEN}Create your directories and files with one command !${ENDCOLOR}                             █
+            █    ${BOLDGREEN}[⚠️ ]${ENDCOLOR} ${BOLDGREEN}Please follow me also on GitHub:${ENDCOLOR} ${BOLDRED}Offensive-Hacker${ENDCOLOR}                               █
+            █    ${BOLDGREEN}[🌟]${ENDCOLOR} ${BOLDGREEN}Automate NMAP, FFUF ...${ENDCOLOR}                                                          █
             █    ${BOLDGREEN}[🌟]${ENDCOLOR} ${BOLDGREEN}Very Helpful in CTFs${ENDCOLOR}                                                             █
-            █    ${BOLDGREEN}[⚠️ ]${ENDCOLOR} ${BOLDGREEN}Usage: Provide your target machine name and target IP${ENDCOLOR}                            █
+            █    ${BOLDGREEN}[📌]${ENDCOLOR} ${BOLDGREEN}== A Open Source Project  ==${ENDCOLOR}                                                     █
+            █    ${BOLDGREEN}[📌]${ENDCOLOR} ${BOLDGREEN}Feel free to submit any bug on:${ENDCOLOR} [ tsty8wu7@duck.com ]                            █
             █                                                                                          █
             █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█
 
@@ -70,23 +72,37 @@ if [[ "$#" -ne 2 ]]; then
 	usage
 fi
 
+clear
 banner
 
 # Target Name and Target IP
 TARGET_NAME="$1"
 TARGET_IP="$2"
+IP=$2
+
+# Checking the target is Up or Down
+printf "\n ${BOLDRED}[*]${ENDCOLOR} ${BOLDYELLOW}Pinging the Target... $ip${ENDCOLOR} " && sleep 3
+if ping -c 1 $IP &> /dev/null; then
+    echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}The $IP is up!${ENDCOLOR}"
+else
+    echo -e "\n ${BOLDRED}[!]${ENDCOLOR} ${BOLDYELLOW}The $IP is down or unreachable.${ENDCOLOR}"
+    echo -e " ${BOLDRED}[!]${ENDCOLOR} ${BOLDRED}Exiting...${ENDCOLOR}\n"
+    exit 
+fi
 
 # Creating Directories and README.md file
 echo -e "\n ${BOLDRED}[+] Creating File:${ENDCOLOR} README.md \n ${BOLDRED}[+] Creating Directory:${ENDCOLOR} recon \n ${BOLDRED}[+] Creating Directory:${ENDCOLOR} exploitation \n ${BOLDRED}[+] Creating Directory:${ENDCOLOR} post \n ${BOLDRED}[+] Creating Directory:${ENDCOLOR} Loot \n ${BOLDRED}[+] Creating File:${ENDCOLOR} init-foothold"
 
 touch README.md
 mkdir recon exploitation post Loot init-foothold 2>/dev/null 
+
+
 # 
 # printf "\n ${BOLDRED}[!]${ENDCOLOR} ${BOLDGREEN}Enter Your Machine (Target) Name Here:${ENDCOLOR} " &&  read name
 # printf "\n ${BOLDRED}[!]${ENDCOLOR} ${BOLDGREEN}Enter Your Machine (Target) IP Address Here:${ENDCOLOR} " &&  read ip
 
-export IP=$2
-printf "\n ${BOLDRED}[*]${ENDCOLOR} ${BOLDGREEN}Your Target IP exported to your ~/.bashrc file Temporarily${ENDCOLOR}"
+# export IP=$2
+# printf "\n ${BOLDRED}[*]${ENDCOLOR} ${BOLDGREEN}Your Target IP exported to your ~/.bashrc file Temporarily${ENDCOLOR}"
 
 # I think the README.md file contains nothing; let's fill it!
 echo -e "
@@ -137,31 +153,26 @@ echo -e "
 " >> README.md
 
 
-sleep 1
+# sleep 1
 
-# Checking the target is Up or Down
-printf "\n\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}Pinging the Target... $ip${ENDCOLOR} " && sleep 3
-if ping -c 1 $IP &> /dev/null; then
-    echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}The $IP is up!${ENDCOLOR}"
-else
-    echo -e "\n ${BOLDRED}[!]${ENDCOLOR} ${BOLDYELLOW}The $IP is down or unreachable.${ENDCOLOR}"
-    echo -e " ${BOLDRED}[!]${ENDCOLOR} ${BOLDRED}Exiting...${ENDCOLOR}\n"
-    exit 
-fi
+
 
 sleep 2
 
 #Running NMAP Scan on Target IP
-echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDRED}Running Comprehensive NMAP Scan on the target. This may take some time, Please be patient:${ENDCOLOR} \n"
+echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}Running Comprehensive NMAP Scan on the target. This may take some time, Please be patient:${ENDCOLOR} \n"
 
 echo -e "════════════════════════════════════════════════════════════════════════════\n"
 
-sudo nmap $IP -F -sV -A -O -sS -Pn -oN recon/nmap-scan.txt | grep -E "tcp|udp"
+if [[ $(sudo nmap $IP -F -sV -A -O -sS -Pn -oN recon/nmap-scan.txt) ]]; then
 
-# Exporting NMAP Scan report to recon/ as nmap-scan.txt
-echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}Full Report can be found under the recon/ .${ENDCOLOR} 
- ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}For more information about the target, check out the generated report...${ENDCOLOR}"
-echo -e "\n════════════════════════════════════════════════════════════════════════════"
+    echo -e "${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}Open Ports & Services${ENDCOLOR}\n"
+    grep -E "tcp|udp" recon/nmap-scan.txt
+    # Exporting NMAP Scan report to recon/ as nmap-scan.txt
+    echo -e "\n ${BOLDRED}[+]${ENDCOLOR} ${BOLDYELLOW}Full Report can be found under the recon/ .${ENDCOLOR} 
+    ${BOLDRED}[+]${ENDCOLOR}${BOLDYELLOW}For more information about the target, check out the generated report...${ENDCOLOR}"
+    echo -e "\n════════════════════════════════════════════════════════════════════════════"
+fi
 
 
 sleep 2
